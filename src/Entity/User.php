@@ -4,7 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: "App\Repository\UserRepository")]
 #[ORM\Table("user")]
 class User {
     #[ORM\Column(name: "id", type: Types::INTEGER)]

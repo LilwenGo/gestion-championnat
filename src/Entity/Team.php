@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: "App\Repository\TeamRepository")]
 #[ORM\Table("team")]
 class Team {
     #[ORM\Column(name: "id", type: Types::INTEGER)]

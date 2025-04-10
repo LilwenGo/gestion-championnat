@@ -17,7 +17,7 @@ class GameRepository extends EntityRepository {
             "SELECT g FROM ".$this->getEntityName()." g WHERE g.id = :id"
         );
         $query->setParameter('id', $id);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
     
     public function findByTeam(int $team_id): array {

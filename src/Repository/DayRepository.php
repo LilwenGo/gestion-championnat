@@ -17,6 +17,6 @@ class DayRepository extends EntityRepository {
             "SELECT c FROM ".$this->getEntityName()." c WHERE c.id = :id"
         );
         $query->setParameter('id', $id);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
 }

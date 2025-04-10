@@ -12,11 +12,11 @@ class GameService {
     }
 
     public function getGameById(int $id): ?Game {
-        return $this->em->getRepository("App:Game")->findById($id);
+        return $this->em->getRepository("App\Entity\Game")->findById($id);
     }
 
     public function getGameByTeam(int $team_id): array {
-        return $this->em->getRepository("App:Game")->findByTeam($team_id);
+        return $this->em->getRepository("App\Entity\Game")->findByTeam($team_id);
     }
 
     public function insertGame(Game $game): void {

@@ -12,7 +12,7 @@ class DayService {
     }
 
     public function getDayById(int $id): ?Day {
-        return $this->em->getRepository("App:Day")->findById($id);
+        return $this->em->getRepository("App\Entity\Day")->findById($id);
     }
 
     public function insertDay(Day $day): void {

@@ -1,3 +1,119 @@
+* {
+    font-family: sans-serif;
+    text-align: center;
+}
+
 body {
-    background-color: skyblue;
+    background-color: #DFDFDF;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 100%;
+    background-color: white;
+    box-shadow: black 0 2px 5px 0;
+}
+
+main {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 50px;
+}
+
+nav {
+    gap: 0px !important;
+    width: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+.flex-x {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.flex-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    padding: 10px;
+    border: black 1px solid;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.cs-card {
+    padding: 10px;
+    border: black 1px solid;
+    border-radius: 10px;
+    background-color: white;
+    width: fit-content;
+}
+
+.cs-card a {
+    text-decoration: none;
+    color: black;
+}
+
+.cs-card a:hover {
+    color: gray;
+}
+
+.nav-link {
+    color: gray;
+    padding: 10px 20px;
+    border: black 0.5px solid;
+    border-top: none;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+.logo-l {
+    width: 100px;
+    object-fit: cover;
+}
+
+.logo-m {
+    width: 75px;
+    object-fit: cover;
+}
+
+.logo-s {
+    width: 30px;
+    object-fit: cover;
+}
+
+.nav-link:hover {
+    color: #00b7ff;
+}
+
+.nav-link-active {
+    font-weight: bold;
+    color: #00b7ff;
+    border-bottom: #00b7ff 3px solid;
+}
+
+form {
+    padding: 10px;
+    border: black 1px solid;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }

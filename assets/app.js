@@ -1,4 +1,5 @@
 import './bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -7,4 +8,10 @@ import './bootstrap.js';
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+const navLinks = document.querySelectorAll('.nav-link');
+
+for(const link of navLinks) {
+    if(link.getAttribute('href') === window.location.pathname) {
+        link.classList.add("nav-link-active");
+    }
+}

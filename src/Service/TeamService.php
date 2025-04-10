@@ -23,12 +23,7 @@ class TeamService {
         return $this->em->getRepository("App\Entity\Team")->findByName($name);
     }
 
-    public function insertTeam(Team $team): void {
-        $this->em->persist($team);
-        $this->em->flush();
-    }
-
-    public function updateTeam(Team $team): void {
+    public function saveTeam(Team $team): void {
         $this->em->persist($team);
         $this->em->flush();
     }

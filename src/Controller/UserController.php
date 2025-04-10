@@ -43,7 +43,7 @@ class UserController extends AbstractController {
 
             $user->setCreationDate(new DateTimeImmutable());
 
-            $service->insertUser($user);
+            $service->saveUser($user);
 
             return $this->redirectToRoute('championships');
         }

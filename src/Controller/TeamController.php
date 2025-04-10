@@ -48,7 +48,7 @@ class TeamController extends AbstractController {
                 $team->setLogo($fileName);
             }
 
-            $service->insertTeam($team);
+            $service->saveTeam($team);
 
             return $this->redirectToRoute('teams');
         }

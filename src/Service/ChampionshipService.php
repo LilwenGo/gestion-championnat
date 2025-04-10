@@ -23,12 +23,7 @@ class ChampionshipService {
         return $this->em->getRepository("App\Entity\Championship")->findByName($name);
     }
 
-    public function insertChampionship(Championship $championship): void {
-        $this->em->persist($championship);
-        $this->em->flush();
-    }
-
-    public function updateChampionship(Championship $championship): void {
+    public function saveChampionship(Championship $championship): void {
         $this->em->persist($championship);
         $this->em->flush();
     }

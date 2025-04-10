@@ -19,12 +19,7 @@ class UserService {
         return $this->em->getRepository("App\Entity\User")->findByEmail($email);
     }
 
-    public function insertUser(User $user): void {
-        $this->em->persist($user);
-        $this->em->flush();
-    }
-
-    public function updateUser(User $user): void {
+    public function saveUser(User $user): void {
         $this->em->persist($user);
         $this->em->flush();
     }

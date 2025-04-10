@@ -119,7 +119,7 @@ class ChampionshipController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $service->insertChampionship($championship);
+            $service->saveChampionship($championship);
 
             return $this->redirectToRoute('championships');
         }

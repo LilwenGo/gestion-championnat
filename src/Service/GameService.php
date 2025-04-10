@@ -19,12 +19,7 @@ class GameService {
         return $this->em->getRepository("App\Entity\Game")->findByTeam($team_id);
     }
 
-    public function insertGame(Game $game): void {
-        $this->em->persist($game);
-        $this->em->flush();
-    }
-
-    public function updateGame(Game $game): void {
+    public function saveGame(Game $game): void {
         $this->em->persist($game);
         $this->em->flush();
     }

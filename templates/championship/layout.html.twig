@@ -5,7 +5,7 @@
 {% block navlinks %}
     <a class="nav-link" href="{{ path('championship', { 'id': championship.id }) }}">Championnat: {{ championship.name }}</a>
     <a class="nav-link" href="{{ path('championship_ranking', { 'id': championship.id }) }}">Classement</a>
-    <a class="nav-link" href="{{ path('championship_days', { 'id': championship.id }) }}">Journées</a>
+    <a class="nav-link" href="{{ path('days', { 'id': championship.id }) }}">Journées</a>
 {% endblock %}
 {% block body %}
     <main class="flex-y">

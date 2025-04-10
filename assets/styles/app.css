@@ -72,6 +72,57 @@ p {
     color: gray;
 }
 
+.table-card {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: black 1px solid;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-card > div {
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-card > div.head span {
+    border: gray 2px solid;
+    border-top: none;
+    padding: 10px;
+}
+
+.table-card > div.row {
+    gap: 20px;
+}
+
+.table-card > div.row span {
+    padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+    width: fit-content;
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.table-card > div.feet {
+    background-color: transparent;
+}
+
 .nav-link {
     color: gray;
     padding: 10px 20px;
@@ -116,4 +167,18 @@ form {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    width: fit-content;
+}
+
+table {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    border-collapse: separate;
+}
+
+table th, table td {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
 }

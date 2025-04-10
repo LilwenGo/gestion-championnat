@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: "App\Repository\GameRepository")]
 #[ORM\Table("game")]
+#[Assert\Expression(
+    "this.getTeam1() != this.getTeam2()",
+    message: "Les deux équipes ne peuvent pas être la même."
+)]
 class Game
 {
     #[ORM\Column(name: "id", type: Types::INTEGER)]

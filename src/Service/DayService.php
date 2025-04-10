@@ -15,12 +15,11 @@ class DayService {
         return $this->em->getRepository("App\Entity\Day")->findById($id);
     }
 
-    public function insertDay(Day $day): void {
-        $this->em->persist($day);
-        $this->em->flush();
+    public function getDayByIdWithGames(int $id): ?Day {
+        return $this->em->getRepository("App\Entity\Day")->findByIdWithGames($id);
     }
 
-    public function updateDay(Day $day): void {
+    public function saveDay(Day $day): void {
         $this->em->persist($day);
         $this->em->flush();
     }

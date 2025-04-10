@@ -28,6 +28,10 @@ class Day {
         $this->games = new ArrayCollection();
     }
 
+    public function __tostring(): string {
+        return 'Journée '.$this->number;
+    }
+
     /**
      * Get the value of id
      */ 

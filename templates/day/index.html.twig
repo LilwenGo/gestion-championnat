@@ -1,0 +1,30 @@
+{% extends 'championship/layout.html.twig' %}
+{% block title %}
+    Liste des journées de: {{ championship.name }}
+{% endblock %}
+{% block content %}
+    <h1>Liste des journées de: {{ championship.name }}</h1>
+    {{ form(daySelect) }}
+    {% if day %}
+        <div class="table-card">
+            <div class="head">
+                <span>Matchs</span>
+            </div>
+            {% for game in day.games %}
+                <div class="row">
+                    <span>{{ game.team1.name }} <img class="logo-s" src="/images/{{ game.team1.logo }}" alt="Logo de {{ game.team1.name }}" /></span>
+                    <span>{{game.team1Point}} - {{game.team2Point}}</span>
+                    <span><img class="logo-s" src="/images/{{ game.team2.logo }}" alt="Logo de {{ game.team2.name }}" /> {{ game.team2.name }}</span>
+                </div>
+            {% endfor %}
+            {% if app.user %}
+                <div class="feet">
+                    <a class="btn btn-primary" href="{{ path('add_game', {'id': day.id}) }}">Ajouter un match</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if app.user %}
+        <a class="btn btn-primary" href="{{ path('add_day', {'id': championship.id}) }}">Ajouter une journée</a>
+    {% endif %}
+{% endblock %}

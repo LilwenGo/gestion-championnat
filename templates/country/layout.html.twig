@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    
+{% endblock %}
+{% block navlinks %}
+    <a class="nav-link" href="{{ path('country', { 'id': country.id }) }}">Pays: {{ country.name }}</a>
+{% endblock %}
+{% block body %}
+    <main class="flex-y">
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+{% endblock %}

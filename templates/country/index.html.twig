@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Liste des pays
+{% endblock %}
+{% block body %}
+    <main class="flex-y">
+        <h1>Liste des pays</h1>
+        {% for c in countries %}
+            {{ include('components/country_card.html.twig', { 'name': c.name, 'id': c.id }) }}
+        {% else %}
+            <h2>Aucun pays disponible !</h2>
+        {% endfor %}
+        {% if app.user %}
+            <a class="btn btn-primary" href="{{ path('add_country') }}">Créer un nouveau pays</a>
+        {% endif %}
+    </main>
+{% endblock %}

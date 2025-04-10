@@ -27,6 +27,10 @@ class Country {
         $this->teams = new ArrayCollection();
     }
 
+    public function __tostring(): string {
+        return $this->name;
+    }
+
     /**
      * Get the value of id
      */ 

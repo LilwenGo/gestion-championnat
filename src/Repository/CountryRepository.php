@@ -17,7 +17,7 @@ class CountryRepository extends EntityRepository {
             "SELECT c FROM ".$this->getEntityName()." c WHERE c.id = :id"
         );
         $query->setParameter('id', $id);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
     
     public function findByName(string $name): ?Country {
@@ -25,6 +25,6 @@ class CountryRepository extends EntityRepository {
             "SELECT c FROM ".$this->getEntityName()." c WHERE c.name = :name"
         );
         $query->setParameter('name', $name);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
 }

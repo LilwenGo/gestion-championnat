@@ -11,12 +11,16 @@ class CountryService {
         $this->em = $em;
     }
 
+    public function getAll(): array {
+        return $this->em->getRepository("App\Entity\Country")->getAll();
+    }
+
     public function getCountryById(int $id): ?Country {
-        return $this->em->getRepository("App:Country")->findById($id);
+        return $this->em->getRepository("App\Entity\Country")->findById($id);
     }
 
     public function getCountryByName(string $name): ?Country {
-        return $this->em->getRepository("App:Country")->findByName($name);
+        return $this->em->getRepository("App\Entity\Country")->findByName($name);
     }
 
     public function insertCountry(Country $country): void {

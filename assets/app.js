@@ -7,11 +7,3 @@ import 'bootstrap/dist/css/bootstrap.min.css';
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-
-const navLinks = document.querySelectorAll('.nav-link');
-
-for(const link of navLinks) {
-    if(link.getAttribute('href') === window.location.pathname) {
-        link.classList.add("nav-link-active");
-    }
-}

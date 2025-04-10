@@ -25,5 +25,14 @@
             </nav>
         </header>
         {% block body %}{% endblock %}
+        <script type="text/js">
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            for(const link of navLinks) {
+                if(link.getAttribute('href') === window.location.pathname) {
+                    link.classList.add("nav-link-active");
+                }
+            }
+        </script>
     </body>
 </html>

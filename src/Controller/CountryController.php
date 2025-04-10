@@ -5,6 +5,7 @@ use App\Entity\Country;
 use App\Service\CountryService;
 use App\Form\CountryFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +47,7 @@ class CountryController extends AbstractController {
                 $country->setLogo($fileName);
             }
 
-            $service->insertCountry($country);
+            $service->saveCountry($country);
 
             return $this->redirectToRoute('countries');
         }
@@ -54,5 +55,60 @@ class CountryController extends AbstractController {
         return $this->render('country/new.html.twig', [
             'countryForm' => $form,
         ]);
+    }
+
+    #[Route("/{id}/update", name: "update_country")]
+    public function update(Request $request, CountryService $service, int $id): RedirectResponse|Response {
+        $country = $service->getCountryById($id);
+        if(!$country) {
+            return $this->redirectToRoute('add_country');
+        }
+        $form = $this->createForm(CountryFormType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('logo')->getData();
+
+            if($file) {
+                try {
+                    $fileName = uniqid('country_logo_').'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('images_dir'),
+                        $fileName
+                    );
+
+                    $oldFilename = $country->getLogo();
+                    if ($oldFilename && file_exists($this->getParameter('images_dir').'/'.$oldFilename)) {
+                        if (!unlink($this->getParameter('images_dir').'/'.$oldFilename)) {
+                            $this->addFlash('warning', 'Impossible de supprimer l’ancien fichier.');
+                        }
+                    }
+    
+                    $country->setLogo($fileName);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Le fichier n\'a pas pu être enregistré.');
+                }
+            }
+
+            $service->saveCountry($country);
+
+            return $this->redirectToRoute('country', ["id" => $id]);
+        }
+
+        return $this->render('country/update.html.twig', [
+            'countryForm' => $form,
+            'country' => $country
+        ]);
+    }
+
+    #[Route("/{id}/delete", name: "delete_country")]
+    public function delete(CountryService $service, int $id): RedirectResponse {
+        $country = $service->getCountryById($id);
+        if(!$country) {
+            $this->addFlash('error', 'Le pays n\'a pas pu être suprimmé.');
+        } else {
+            $service->deleteCountry($country);
+        }
+        return $this->redirectToRoute('countries');
     }
 }

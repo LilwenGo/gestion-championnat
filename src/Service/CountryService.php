@@ -23,12 +23,7 @@ class CountryService {
         return $this->em->getRepository("App\Entity\Country")->findByName($name);
     }
 
-    public function insertCountry(Country $country): void {
-        $this->em->persist($country);
-        $this->em->flush();
-    }
-
-    public function updateCountry(Country $country): void {
+    public function saveCountry(Country $country): void {
         $this->em->persist($country);
         $this->em->flush();
     }

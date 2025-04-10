@@ -7,4 +7,10 @@
         <h1>{{ country.name }}</h1>
         <img class="logo-l" src="/images/{{ country.logo }}" alt="Logo de {{ country.name }}" />
     </div>
+    {% if app.user %}
+        <div class="flex-x">
+            <a class="btn btn-secondary" href="{{ path('update_country', {'id': country.id}) }}">Modifier</a>
+            <a class="btn btn-danger" href="{{ path('delete_country', {'id': country.id}) }}">Suprimmer</a>
+        </div>
+    {% endif %}
 {% endblock %}

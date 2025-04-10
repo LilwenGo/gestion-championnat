@@ -11,12 +11,16 @@ class ChampionshipService {
         $this->em = $em;
     }
 
+    public function getAll(): array {
+        return $this->em->getRepository("App\Entity\Championship")->getAll();
+    }
+
     public function getChampionshipById(int $id): ?Championship {
-        return $this->em->getRepository("App:Championship")->findById($id);
+        return $this->em->getRepository("App\Entity\Championship")->findById($id);
     }
 
     public function getChampionshipByName(string $name): ?Championship {
-        return $this->em->getRepository("App:Championship")->findByName($name);
+        return $this->em->getRepository("App\Entity\Championship")->findByName($name);
     }
 
     public function insertChampionship(Championship $championship): void {

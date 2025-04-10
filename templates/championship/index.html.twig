@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Liste des championnats
+{% endblock %}
+{% block body %}
+    <main class="flex-y">
+        <h1>Liste des championnats</h1>
+        {% for cs in championships %}
+            {{ include('components/championship_card.html.twig', { 'name': cs.name, 'id': cs.id }) }}
+        {% else %}
+            <h2>Aucun championnat disponible !</h2>
+        {% endfor %}
+        {% if app.user %}
+            <a class="btn btn-primary" href="{{ path('add_championship') }}">Créer un nouveau championnat</a>
+        {% endif %}
+    </main>
+{% endblock %}

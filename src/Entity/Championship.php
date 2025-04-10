@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\Collection;
@@ -17,11 +18,11 @@ class Championship {
     #[ORM\Column(name: "name", type: Types::STRING, length: 255)]
     private ?string $name = null;
     
-    #[ORM\Column(name: "startDate", type: Types::DATETIME_IMMUTABLE)]
-    private ?string $startDate = null;
+    #[ORM\Column(name: "startDate", type: Types::DATETIME_MUTABLE)]
+    private ?DateTime $startDate = null;
     
-    #[ORM\Column(name: "endDate", type: Types::DATETIME_IMMUTABLE)]
-    private ?string $endDate = null;
+    #[ORM\Column(name: "endDate", type: Types::DATETIME_MUTABLE)]
+    private ?DateTime $endDate = null;
 
     #[ORM\Column(name: "wonPoint", type: Types::INTEGER)]
     private ?int $wonPoint = null;
@@ -89,7 +90,7 @@ class Championship {
     /**
      * Get the value of startDate
      */ 
-    public function getStartDate(): ?string
+    public function getStartDate(): ?DateTime
     {
         return $this->startDate;
     }
@@ -99,7 +100,7 @@ class Championship {
      *
      * @return  self
      */ 
-    public function setStartDate(?string $startDate): static
+    public function setStartDate(?DateTime $startDate): static
     {
         $this->startDate = $startDate;
 
@@ -109,7 +110,7 @@ class Championship {
     /**
      * Get the value of endDate
      */ 
-    public function getEndDate(): ?string
+    public function getEndDate(): ?DateTime
     {
         return $this->endDate;
     }
@@ -119,7 +120,7 @@ class Championship {
      *
      * @return  self
      */ 
-    public function setEndDate(?string $endDate): static
+    public function setEndDate(?DateTime $endDate): static
     {
         $this->endDate = $endDate;
 

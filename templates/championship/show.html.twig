@@ -1,0 +1,16 @@
+{% extends 'championship/layout.html.twig' %}
+{% block title %}
+    Championnat: {{ championship.name }}
+{% endblock %}
+{% block content %}
+    <div class="card flex-y">
+        <h1>{{ championship.name }}</h1>
+        <span>De {{ formatedStartDate }} à {{ formatedEndDate }}</span>
+        {% if championship.wonPoint != championship.lostPoint %}
+            <p>Terminé sur une victoire: {{ championship.wonPoint }}-{{ championship.lostPoint }}</p>
+        {% else %}
+            <p>Terminé sur un match nul: {{ championship.drawPoint}}-{{ championship.drawPoint }}</p>
+        {% endif %}
+        <p>Type de classement: {{ championship.typeRanking }}</p>
+    </div>
+{% endblock %}

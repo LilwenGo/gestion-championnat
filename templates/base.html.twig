@@ -12,6 +12,18 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <nav class="flex-x">
+                <a class="nav-link" href="{{ path('championships') }}">Liste des championnats</a>
+                <a class="nav-link" href="{{ path('teams') }}">Liste des équipes</a>
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('countries') }}">Liste des pays</a>
+                {% endif %}
+                {% block navlinks %}
+                    
+                {% endblock %}
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>

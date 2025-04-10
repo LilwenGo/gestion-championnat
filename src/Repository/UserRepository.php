@@ -17,7 +17,7 @@ class UserRepository extends EntityRepository {
             "SELECT u FROM ".$this->getEntityName()." u WHERE u.id = :id"
         );
         $query->setParameter('id', $id);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
     
     public function findByEmail(string $email): ?User {
@@ -25,6 +25,6 @@ class UserRepository extends EntityRepository {
             "SELECT u FROM ".$this->getEntityName()." u WHERE u.email = :email"
         );
         $query->setParameter('email', $email);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
 }

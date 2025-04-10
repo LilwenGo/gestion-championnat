@@ -1,12 +1,17 @@
 <?php
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: "App\Repository\UserRepository")]
 #[ORM\Table("user")]
-class User {
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface {
     #[ORM\Column(name: "id", type: Types::INTEGER)]
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +30,7 @@ class User {
     private ?string $password = null;
     
     #[ORM\Column(name: "creationDate", type: Types::DATETIME_IMMUTABLE)]
-    private ?string $creationDate = null;
+    private ?DateTimeImmutable $creationDate = null;
 
     /**
      * Get the value of id
@@ -108,6 +113,16 @@ class User {
     }
 
     /**
+     * The public representation of the user (e.g. a username, an email address, etc.)
+     *
+     * @see UserInterface
+     * @return string|null
+     */
+    public function getUserIdentifier(): string {
+        return (string) $this->email;
+    }
+
+    /**
      * Get the value of password
      */ 
     public function getPassword(): ?string
@@ -130,7 +145,7 @@ class User {
     /**
      * Get the value of creationDate
      */ 
-    public function getCreationDate(): ?string
+    public function getCreationDate(): ?DateTimeImmutable
     {
         return $this->creationDate;
     }
@@ -140,10 +155,26 @@ class User {
      *
      * @return  self
      */ 
-    public function setCreationDate( ?string $creationDate): static
+    public function setCreationDate( ?DateTimeImmutable $creationDate): static
     {
         $this->creationDate = $creationDate;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array {
+        return ["ROLE_USER"];
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

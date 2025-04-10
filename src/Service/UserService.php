@@ -12,11 +12,11 @@ class UserService {
     }
 
     public function getUserById(int $id): ?User {
-        return $this->em->getRepository("App:User")->findById($id);
+        return $this->em->getRepository("App\Entity\User")->findById($id);
     }
 
     public function getUserByEmail(string $email): ?User {
-        return $this->em->getRepository("App:User")->findByEmail($email);
+        return $this->em->getRepository("App\Entity\User")->findByEmail($email);
     }
 
     public function insertUser(User $user): void {

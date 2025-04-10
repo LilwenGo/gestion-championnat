@@ -17,7 +17,7 @@ class TeamRepository extends EntityRepository {
             "SELECT t FROM ".$this->getEntityName()." t WHERE t.id = :id"
         );
         $query->setParameter('id', $id);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
     
     public function findByName(string $name): ?Team {
@@ -25,6 +25,6 @@ class TeamRepository extends EntityRepository {
             "SELECT t FROM ".$this->getEntityName()." t WHERE t.name = :name"
         );
         $query->setParameter('name', $name);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
 }

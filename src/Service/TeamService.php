@@ -11,12 +11,16 @@ class TeamService {
         $this->em = $em;
     }
 
+    public function getAll(): array {
+        return $this->em->getRepository("App\Entity\Team")->getAll();
+    }
+
     public function getTeamById(int $id): ?Team {
-        return $this->em->getRepository("App:Team")->findById($id);
+        return $this->em->getRepository("App\Entity\Team")->findById($id);
     }
 
     public function getTeamByName(string $name): ?Team {
-        return $this->em->getRepository("App:Team")->findByName($name);
+        return $this->em->getRepository("App\Entity\Team")->findByName($name);
     }
 
     public function insertTeam(Team $team): void {

@@ -1,0 +1,17 @@
+{% extends 'team/layout.html.twig' %}
+{% block title %}
+    Équipe: {{ team.name }}
+{% endblock %}
+{% block content %}
+    <div class="card flex-y">
+        <h1>{{ team.name }}</h1>
+        <div>
+            <span>Pays: {{ team.country.name }} <img class="logo-s" src="/images/{{ team.country.logo }}" alt="Logo de {{ team.country.name }}" /></span>
+            <br />
+            <span>Date de création: {{ formatedDate }}</span>
+            <p>Président: {{ team.president }}</p>
+            <p>Entraîneur: {{ team.coach }}</p>
+        </div>
+        <img class="logo-l" src="/images/{{ team.logo }}" alt="Logo de {{ team.name }}" />
+    </div>
+{% endblock %}

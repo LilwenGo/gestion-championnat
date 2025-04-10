@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\Collection;
@@ -18,7 +19,7 @@ class Team {
     private ?string $name = null;
     
     #[ORM\Column(name: "creationDate", type: Types::DATETIME_IMMUTABLE)]
-    private ?string $creationDate = null;
+    private ?DateTimeImmutable $creationDate = null;
     
     #[ORM\Column(name: "stade", type: Types::STRING, length: 255)]
     private ?string $stade = null;
@@ -95,7 +96,7 @@ class Team {
     /**
      * Get the value of creationDate
      */ 
-    public function getCreationDate(): ?string
+    public function getCreationDate(): ?DateTimeImmutable
     {
         return $this->creationDate;
     }
@@ -105,7 +106,7 @@ class Team {
      *
      * @return  self
      */ 
-    public function setCreationDate(?string $creationDate): static
+    public function setCreationDate(?DateTimeImmutable $creationDate): static
     {
         $this->creationDate = $creationDate;
 

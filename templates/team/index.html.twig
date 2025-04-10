@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Liste des équipes
+{% endblock %}
+{% block body %}
+    <main class="flex-y">
+        <h1>Liste des équipes</h1>
+        {% for t in teams %}
+            {{ include('components/team_card.html.twig', { 'name': t.name, 'id': t.id }) }}
+        {% else %}
+            <h2>Aucune équipe disponible !</h2>
+        {% endfor %}
+        {% if app.user %}
+            <a class="btn btn-primary" href="{{ path('add_team') }}">Créer une nouvelle équipe</a>
+        {% endif %}
+    </main>
+{% endblock %}

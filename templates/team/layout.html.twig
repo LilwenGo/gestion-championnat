@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    
+{% endblock %}
+{% block navlinks %}
+    <a class="nav-link" href="{{ path('team', { 'id': team.id }) }}">Équipe: {{ team.name }}</a>
+{% endblock %}
+{% block body %}
+    <main class="flex-y">
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+{% endblock %}

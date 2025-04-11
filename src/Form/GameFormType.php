@@ -1,6 +1,7 @@
 <?php
 namespace App\Form;
 
+use App\Entity\Day;
 use App\Entity\Game;
 use App\Entity\Team;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,6 +16,14 @@ class GameFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('day', EntityType::class, options: [
+                'label' => 'Journée',
+                'class' => Day::class,
+                'choices' => $options['days'],
+                'choice_label' => 'number',
+                'choice_value' => 'id',
+                'placeholder' => 'Choisissez une journée',
+            ])
             ->add('team1', EntityType::class, options: [
                 'label' => 'Équipe 1',
                 'class' => Team::class,
@@ -45,6 +54,7 @@ class GameFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Game::class,
+            'days' => null,
             'teams' => null
         ]);
     }

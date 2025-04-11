@@ -10,7 +10,7 @@
         {% else %}
             <h2>Aucun pays disponible !</h2>
         {% endfor %}
-        {% if app.user %}
+        {% if is_granted("ROLE_ADMIN") %}
             <a class="btn btn-primary" href="{{ path('add_country') }}">Créer un nouveau pays</a>
         {% endif %}
     </main>

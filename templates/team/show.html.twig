@@ -14,4 +14,10 @@
         </div>
         <img class="logo-l" src="/images/{{ team.logo }}" alt="Logo de {{ team.name }}" />
     </div>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="flex-x">
+            <a class="btn btn-secondary" href="{{ path('update_team', {'id': team.id}) }}">Modifier</a>
+            <a class="btn btn-danger" href="{{ path('delete_team', {'id': team.id}) }}" onclick="return confirm('Es-tu sûr(e) de vouloir supprimer cet élément ?');">Suprimmer</a>
+        </div>
+    {% endif %}
 {% endblock %}

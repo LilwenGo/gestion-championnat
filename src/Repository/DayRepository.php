@@ -27,4 +27,12 @@ class DayRepository extends EntityRepository {
         $query->setParameter('id', $id);
         return $query->getResult()[0];
     }
+
+    public function findByChampionshipIdWithGames(int $id): array {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT d FROM ".$this->getEntityName()." d JOIN d.games g JOIN g.team1 t1 JOIN g.team2 t2 WHERE d.championship = :id"
+        );
+        $query->setParameter('id', $id);
+        return $query->getResult();
+    }
 }

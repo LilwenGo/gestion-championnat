@@ -12,16 +12,24 @@
         {% endblock %}
     </head>
     <body>
-        <header>
-            <nav class="flex-x">
+        <header class="flex-x">
+            <nav class="flex-x gap-0">
                 <a class="nav-link" href="{{ path('championships') }}">Liste des championnats</a>
                 <a class="nav-link" href="{{ path('teams') }}">Liste des équipes</a>
-                {% if app.user %}
+                {% if is_granted("ROLE_ADMIN") %}
                     <a class="nav-link" href="{{ path('countries') }}">Liste des pays</a>
                 {% endif %}
                 {% block navlinks %}
                     
                 {% endblock %}
+            </nav>
+            <nav class="flex-x">
+                {% if is_granted("ROLE_USER") %}
+                    <a class="btn btn-primary" href="/logout">Se déconnecter</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('app_login') }}">Se connecter</a>
+                    <a class="btn btn-secondary" href="{{ path('app_register') }}">S'inscrire</a>
+                {% endif %}
             </nav>
         </header>
         {% block body %}{% endblock %}

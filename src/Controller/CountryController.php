@@ -11,9 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route("/country")]
 class CountryController extends AbstractController {
-    #[Route('/', name: "countries")]
+    #[Route('/country', name: "countries")]
     public function index(CountryService $service) {
         $countries = $service->getAll();
         return $this->render('country/index.html.twig', [
@@ -21,7 +20,7 @@ class CountryController extends AbstractController {
         ]);
     }
         
-    #[Route("/{id}", name: "country")]
+    #[Route("/country/{id}", name: "country")]
     public function showCountry(CountryService $service, int $id): Response {
         $country = $service->getCountryById($id);
         return $this->render("country/show.html.twig", [
@@ -29,7 +28,7 @@ class CountryController extends AbstractController {
         ]);
     }
 
-    #[Route("/new/insert", name: "add_country")]
+    #[Route("/admin/country/insert", name: "add_country")]
     public function insert(Request $request, CountryService $service): RedirectResponse|Response {
         $country = new Country();
         $form = $this->createForm(CountryFormType::class, $country);
@@ -57,7 +56,7 @@ class CountryController extends AbstractController {
         ]);
     }
 
-    #[Route("/{id}/update", name: "update_country")]
+    #[Route("/admin/country/{id}/update", name: "update_country")]
     public function update(Request $request, CountryService $service, int $id): RedirectResponse|Response {
         $country = $service->getCountryById($id);
         if(!$country) {
@@ -101,12 +100,18 @@ class CountryController extends AbstractController {
         ]);
     }
 
-    #[Route("/{id}/delete", name: "delete_country")]
+    #[Route("/admin/country/{id}/delete", name: "delete_country")]
     public function delete(CountryService $service, int $id): RedirectResponse {
         $country = $service->getCountryById($id);
         if(!$country) {
             $this->addFlash('error', 'Le pays n\'a pas pu être suprimmé.');
         } else {
+            $filename = $country->getLogo();
+            if ($filename && file_exists($this->getParameter('images_dir').'/'.$filename)) {
+                if (!unlink($this->getParameter('images_dir').'/'.$filename)) {
+                    $this->addFlash('warning', 'Impossible de supprimer l’ancien fichier.');
+                }
+            }
             $service->deleteCountry($country);
         }
         return $this->redirectToRoute('countries');

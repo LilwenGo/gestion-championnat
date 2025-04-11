@@ -17,14 +17,14 @@
                     <span><img class="logo-s" src="/images/{{ game.team2.logo }}" alt="Logo de {{ game.team2.name }}" /> {{ game.team2.name }}</span>
                 </div>
             {% endfor %}
-            {% if app.user %}
+            {% if is_granted("ROLE_ADMIN") %}
                 <div class="feet">
-                    <a class="btn btn-primary" href="{{ path('add_game', {'id': day.id}) }}">Ajouter un match</a>
+                    <a class="btn btn-primary" href="{{ path('add_game_from_day', {'id': day.id}) }}">Ajouter un match</a>
                 </div>
             {% endif %}
         </div>
     {% endif %}
-    {% if app.user %}
+    {% if is_granted("ROLE_ADMIN") %}
         <a class="btn btn-primary" href="{{ path('add_day', {'id': championship.id}) }}">Ajouter une journée</a>
     {% endif %}
 {% endblock %}

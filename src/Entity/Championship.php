@@ -39,7 +39,7 @@ class Championship {
     #[ORM\ManyToMany(targetEntity: Team::class, mappedBy: "championships")]
     private Collection $teams;
     
-    #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'championship')]
+    #[ORM\OneToMany(targetEntity: Day::class, mappedBy: 'championship', cascade: ['persist', 'remove'])]
     private Collection $days;
 
     public function __construct() {
@@ -222,7 +222,36 @@ class Championship {
      */ 
     public function setTeams(Collection $teams): static
     {
-        $this->teams = $teams;
+        // Supprimer les équipes non sélectionnées
+        foreach ($this->teams as $existingTeam) {
+            if (!$teams->contains($existingTeam)) {
+                $this->removeTeam($existingTeam);
+            }
+        }
+
+        // Ajouter les nouvelles équipes
+        foreach ($teams as $team) {
+            $this->addTeam($team);
+        }
+
+        return $this;
+    }
+
+    public function addTeam(Team $team): static
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams->add($team);
+            $team->addChampionship($this); // synchronise l’autre côté
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): static
+    {
+        if ($this->teams->removeElement($team)) {
+            $team->removeChampionship($this);
+        }
 
         return $this;
     }

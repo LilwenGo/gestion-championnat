@@ -13,4 +13,113 @@
         {% endif %}
         <p>Type de classement: {{ championship.typeRanking }}</p>
     </div>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="flex-x">
+            <a class="btn btn-secondary" href="{{ path('update_championship', {'id': championship.id}) }}">Modifier</a>
+            <a class="btn btn-danger" href="{{ path('delete_championship', {'id': championship.id}) }}" onclick="return confirm('Es-tu sûr(e) de vouloir supprimer cet élément ?');">Suprimmer</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Équipes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in championship.teams %}
+                    <tr>
+                        <td>
+                            <div class="flex-x">
+                                {{ team.name }} <img class="logo-s" src="/images/{{ team.logo }}" alt="Logo de {{ team.name }}" />
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>Aucune équipe</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Journées</th>
+                </tr>
+                <tr>
+                    <th>Journée</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in championship.days %}
+                    <tr>
+                        <td>Journée {{day.number}}</td>
+                        <td>
+                            <div class="flex-x">
+                                <a class="btn btn-warning" href="{{ path('update_day', {'id': day.id}) }}">Modifier</a>
+                                <a class="btn btn-danger" href="{{ path('delete_day', {'id': day.id}) }}" onclick="return confirm('Es-tu sûr(e) de vouloir supprimer cet élément ?');">Suprimmer</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <a class="btn btn-primary" href="{{ path('add_day', {'id': championship.id}) }}">Ajouter une journée</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="5">Matchs</th>
+                </tr>
+                <tr>
+                    <th>Journée</th>
+                    <th>Équipe 1</th>
+                    <th>Score</th>
+                    <th>Équipe 2</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in championship.days %}
+                    {% for game in day.games %}
+                        <tr>
+                            <td>Journée {{day.number}}</td>
+                            <td>
+                                <div class="flex-x">
+                                    {{ game.team1.name }} <img class="logo-s" src="/images/{{ game.team1.logo }}" alt="Logo de {{ game.team1.name }}" />
+                                </div>
+                            </td>
+                            <td>{{game.team1Point}} - {{game.team2Point}}</td>
+                            <td>
+                                <div class="flex-x">
+                                    <img class="logo-s" src="/images/{{ game.team2.logo }}" alt="Logo de {{ game.team2.name }}" /> {{ game.team2.name }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex-x">
+                                    <a class="btn btn-warning" href="{{ path('update_game', {'id': game.id}) }}">Modifier</a>
+                                    <a class="btn btn-danger" href="{{ path('delete_game', {'id': game.id}) }}" onclick="return confirm('Es-tu sûr(e) de vouloir supprimer cet élément ?');">Suprimmer</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <a class="btn btn-primary" href="{{ path('add_game_from_championship', {'id': championship.id}) }}">Ajouter un match</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    {% endif %}
 {% endblock %}

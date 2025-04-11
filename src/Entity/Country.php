@@ -20,7 +20,7 @@ class Country {
     #[ORM\Column(name: "logo", type: Types::STRING, length: 255)]
     private ?string $logo = null;
 
-    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'country')]
+    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'country', cascade: ['persist', 'remove'])]
     private Collection $teams;
 
     public function __construct() {

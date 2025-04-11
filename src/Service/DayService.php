@@ -19,6 +19,10 @@ class DayService {
         return $this->em->getRepository("App\Entity\Day")->findByIdWithGames($id);
     }
 
+    public function getDayByChampionshipIdWithGames(int $id): array {
+        return $this->em->getRepository("App\Entity\Day")->findByChampionshipIdWithGames($id);
+    }
+
     public function saveDay(Day $day): void {
         $this->em->persist($day);
         $this->em->flush();

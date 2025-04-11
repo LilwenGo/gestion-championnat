@@ -17,7 +17,7 @@ class Day {
     #[ORM\Column(name: "number", type: Types::STRING, length: 255)]
     private ?string $number = null;
 
-    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'day')]
+    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'day', cascade: ['persist', 'remove'])]
     private Collection $games;
 
     #[ORM\ManyToOne(targetEntity: Championship::class, inversedBy: "days")]

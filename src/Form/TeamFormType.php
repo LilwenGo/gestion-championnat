@@ -38,7 +38,8 @@ class TeamFormType extends AbstractType
             ])
             ->add('logo', FileType::class, [
                 'label' => "Logo",
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
                 ])
             ->add('valider', SubmitType::class)
         ;

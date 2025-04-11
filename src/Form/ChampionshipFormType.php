@@ -2,6 +2,8 @@
 namespace App\Form;
 
 use App\Entity\Championship;
+use App\Entity\Team;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -32,6 +34,14 @@ class ChampionshipFormType extends AbstractType
             ->add('drawPoint', NumberType::class, [
                 'label' => "Nombre de points en cas de match nul"
                 ])
+            ->add('teams', EntityType::class, [
+                'class' => Team::class,
+                'choice_label' => 'name',
+                'label' => "Équipes",
+                'multiple' => true,
+                'required' => false,
+                'placeholder' => 'Choisissez des équipes',
+            ])
             ->add('typeRanking', options: [
                 'label' => 'Type de classement'
             ])

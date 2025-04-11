@@ -33,10 +33,10 @@ class Team {
     #[ORM\Column(name: "coach", type: Types::STRING, length: 255)]
     private ?string $coach = null;
     
-    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'team1')]
+    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'team1', cascade: ['persist', 'remove'])]
     private Collection $gamesAsTeam1;
     
-    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'team2')]
+    #[ORM\OneToMany(targetEntity: Game::class, mappedBy: 'team2', cascade: ['persist', 'remove'])]
     private Collection $gamesAsTeam2;
 
     #[ORM\ManyToOne(targetEntity: Country::class, inversedBy: "teams")]
@@ -229,6 +229,25 @@ class Team {
     public function setChampionships(Collection $championships): static
     {
         $this->championships = $championships;
+
+        return $this;
+    }
+
+    public function addChampionship(Championship $championship): self
+    {
+        if (!$this->championships->contains($championship)) {
+            $this->championships->add($championship);
+            $championship->addTeam($this); // synchronise aussi dans l’autre sens
+        }
+
+        return $this;
+    }
+
+    public function removeChampionship(Championship $championship): self
+    {
+        if ($this->championships->removeElement($championship)) {
+            $championship->removeTeam($this);
+        }
 
         return $this;
     }

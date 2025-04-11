@@ -10,7 +10,7 @@
         {% else %}
             <h2>Aucune équipe disponible !</h2>
         {% endfor %}
-        {% if app.user %}
+        {% if is_granted("ROLE_ADMIN") %}
             <a class="btn btn-primary" href="{{ path('add_team') }}">Créer une nouvelle équipe</a>
         {% endif %}
     </main>

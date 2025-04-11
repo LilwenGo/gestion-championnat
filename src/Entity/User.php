@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface {
     #[ORM\Column(name: "creationDate", type: Types::DATETIME_IMMUTABLE)]
     private ?DateTimeImmutable $creationDate = null;
 
+    #[ORM\Column(name: "roles", type: Types::JSON)]
+    private array $roles = [];
+
     /**
      * Get the value of id
      */ 
@@ -166,7 +169,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface {
      * @see UserInterface
      */
     public function getRoles(): array {
-        return ["ROLE_USER"];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**

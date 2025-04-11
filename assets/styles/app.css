@@ -15,6 +15,7 @@ header {
     width: 100%;
     background-color: white;
     box-shadow: black 0 2px 5px 0;
+    justify-content: space-between !important;
 }
 
 main {
@@ -24,8 +25,11 @@ main {
 }
 
 nav {
+    width: fit-content;
+}
+
+nav.gap-0 {
     gap: 0px !important;
-    width: 100%;
 }
 
 p {

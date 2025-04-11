@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: "App\Repository\GameRepository")]
 #[ORM\Table("game")]
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     "this.getTeam1() != this.getTeam2()",
     message: "Les deux équipes ne peuvent pas être la même."
 )]
+#[ApiResource]
 class Game
 {
     #[ORM\Column(name: "id", type: Types::INTEGER)]

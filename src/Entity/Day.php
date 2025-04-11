@@ -5,9 +5,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: "App\Repository\DayRepository")]
 #[ORM\Table("day")]
+#[ApiResource]
 class Day {
     #[ORM\Column(name: "id", type: Types::INTEGER)]
     #[ORM\Id]
